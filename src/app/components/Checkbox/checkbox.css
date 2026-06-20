@@ -1,0 +1,73 @@
+/* =============================================================================
+ * Checkbox — 自訂樣式核取方塊（保留原生 input 以維持無障礙）
+ * 引用層級：comp.checkbox.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sv-comp-checkbox-item-spacing);
+  cursor: pointer;
+
+  color:       var(--sv-comp-checkbox-label-color);
+  font-size:   var(--sv-comp-checkbox-label-font-size);
+  line-height: var(--sv-comp-checkbox-label-line-height);
+  font-weight: var(--sv-comp-checkbox-label-font-weight);
+}
+
+/* The real input stays in the DOM (accessible + focusable) but visually hidden. */
+.checkbox__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  margin: 0;
+}
+
+/* The visual box. */
+.checkbox__box {
+  flex: none;
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width:  var(--sv-comp-checkbox-size);
+  height: var(--sv-comp-checkbox-size);
+
+  background-color: var(--sv-comp-checkbox-background);
+  border: var(--sv-comp-checkbox-border-width) solid var(--sv-comp-checkbox-border-color-default);
+  border-radius: var(--sv-comp-checkbox-corner-radius);
+
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+/* Checked — fill with primary + render checkmark via masked SVG. */
+.checkbox__input:checked + .checkbox__box {
+  background-color: var(--sv-comp-checkbox-background-checked);
+  border-color: var(--sv-comp-checkbox-border-color-checked);
+}
+.checkbox__input:checked + .checkbox__box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--sv-comp-checkbox-check-color);
+  -webkit-mask: center / 62% no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 6 9 17l-5-5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask: center / 62% no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 6 9 17l-5-5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Focus ring (keyboard only). */
+.checkbox__input:focus-visible + .checkbox__box {
+  outline: var(--sv-sys-shape-border-width-focus) solid var(--sv-sys-color-border-focus);
+  outline-offset: var(--sv-sys-spacing-padding-xs);
+}
+
+/* Disabled. */
+.checkbox__input:disabled + .checkbox__box {
+  background-color: var(--sv-comp-checkbox-background-disabled);
+  border-color: var(--sv-comp-checkbox-border-color-disabled);
+}
+.checkbox--disabled {
+  cursor: not-allowed;
+  color: var(--sv-comp-checkbox-label-color-disabled);
+}

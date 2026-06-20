@@ -1,0 +1,29 @@
+/* =============================================================================
+ * Popover — 浮動面板
+ * 引用層級：comp.popover.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.popover {
+  width: max-content;
+  max-width: var(--sv-comp-popover-max-width);
+  z-index: 1000;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-comp-popover-item-spacing);
+
+  background-color: var(--sv-comp-popover-background);
+  color: var(--sv-comp-popover-text-color);
+  border: var(--sv-comp-popover-border-width) solid var(--sv-comp-popover-border-color);
+  border-radius: var(--sv-comp-popover-corner-radius);
+  padding: var(--sv-comp-popover-padding);
+
+  font-size:   var(--sv-sys-typescale-body-font-size);
+  line-height: var(--sv-sys-typescale-body-line-height);
+}
+
+.popover:focus-visible {
+  outline: var(--sv-sys-shape-border-width-focus) solid var(--sv-sys-color-border-focus);
+  outline-offset: var(--sv-sys-spacing-padding-xs);
+}

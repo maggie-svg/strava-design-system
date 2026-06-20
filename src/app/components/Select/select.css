@@ -1,0 +1,78 @@
+/* =============================================================================
+ * Select — 下拉選單（原生 <select> + 自訂 chevron）
+ * 引用層級：comp.select.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.select__input {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* Let the native option list render dark. */
+  color-scheme: dark;
+
+  background-color: var(--sv-comp-select-background);
+  border-radius: var(--sv-comp-select-corner-radius);
+  border: var(--sv-comp-select-border-width-default) solid var(--sv-comp-select-border-color-default);
+
+  padding-top:    var(--sv-comp-select-padding-y);
+  padding-bottom: var(--sv-comp-select-padding-y);
+  padding-left:   var(--sv-comp-select-padding-left);
+  padding-right:  var(--sv-comp-select-padding-right);
+
+  color:       var(--sv-comp-select-text-color);
+  font-size:   var(--sv-comp-select-font-size);
+  line-height: var(--sv-comp-select-line-height);
+  font-family: inherit;
+
+  outline: none;
+  cursor: pointer;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.select__input:focus {
+  border-color: var(--sv-comp-select-border-color-focus);
+  box-shadow: 0 0 0 calc(var(--sv-comp-select-border-width-focus) - var(--sv-comp-select-border-width-default))
+    var(--sv-comp-select-border-color-focus);
+}
+
+.select__input:disabled {
+  background-color: var(--sv-sys-color-primary-disabled);
+  color: var(--sv-sys-color-on-primary-disabled);
+  cursor: not-allowed;
+}
+
+.select--error .select__input,
+.select--error .select__input:focus {
+  border-color: var(--sv-comp-select-border-color-error);
+  box-shadow: 0 0 0 calc(var(--sv-comp-select-border-width-focus) - var(--sv-comp-select-border-width-default))
+    var(--sv-comp-select-border-color-error);
+}
+
+/* Custom chevron — masked SVG colored by token; ignores pointer events. */
+.select__chevron {
+  position: absolute;
+  top: 50%;
+  right: var(--sv-comp-select-padding-left);
+  transform: translateY(-50%);
+  width: var(--sv-sys-spacing-padding-lg);
+  height: var(--sv-sys-spacing-padding-lg);
+  pointer-events: none;
+  background-color: var(--sv-comp-select-chevron-color);
+  -webkit-mask: center / contain no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask: center / contain no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.select--error .select__chevron {
+  background-color: var(--sv-comp-select-border-color-error);
+}

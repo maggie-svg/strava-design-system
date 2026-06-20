@@ -1,0 +1,63 @@
+/* =============================================================================
+ * Radio — 單選圓鈕（保留原生 input 以維持無障礙）
+ * 引用層級：comp.radio.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sv-comp-radio-item-spacing);
+  cursor: pointer;
+
+  color:       var(--sv-comp-radio-label-color);
+  font-size:   var(--sv-comp-radio-label-font-size);
+  line-height: var(--sv-comp-radio-label-line-height);
+  font-weight: var(--sv-comp-radio-label-font-weight);
+}
+
+.radio__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  margin: 0;
+}
+
+.radio__box {
+  flex: none;
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width:  var(--sv-comp-radio-size);
+  height: var(--sv-comp-radio-size);
+  background-color: var(--sv-comp-radio-background);
+  border: var(--sv-comp-radio-border-width) solid var(--sv-comp-radio-border-color-default);
+  border-radius: var(--sv-sys-shape-corner-radius-full);
+  transition: border-color 120ms ease;
+}
+
+/* Checked — recolor ring + render centered dot. */
+.radio__input:checked + .radio__box {
+  border-color: var(--sv-comp-radio-border-color-checked);
+}
+.radio__input:checked + .radio__box::after {
+  content: "";
+  position: absolute;
+  inset: 25%;
+  border-radius: var(--sv-sys-shape-corner-radius-full);
+  background-color: var(--sv-comp-radio-dot-color);
+}
+
+.radio__input:focus-visible + .radio__box {
+  outline: var(--sv-sys-shape-border-width-focus) solid var(--sv-sys-color-border-focus);
+  outline-offset: var(--sv-sys-spacing-padding-xs);
+}
+
+.radio__input:disabled + .radio__box {
+  background-color: var(--sv-comp-radio-background-disabled);
+  border-color: var(--sv-comp-radio-border-color-disabled);
+}
+.radio--disabled {
+  cursor: not-allowed;
+  color: var(--sv-comp-radio-label-color-disabled);
+}

@@ -1,0 +1,103 @@
+/* =============================================================================
+ * app.css — Tailwind entry + token bridge
+ * -----------------------------------------------------------------------------
+ * 1. Import the design tokens (ref → sys → comp).
+ * 2. Import Tailwind v4.
+ * 3. Map sys/comp tokens into Tailwind's @theme so utilities (bg-primary,
+ *    rounded-full, text-numeric, p-lg …) resolve to our CSS variables.
+ *
+ * RULE: utilities below are token-backed. Never use Tailwind arbitrary values
+ * with raw numbers/hex (e.g. p-[12px], text-[#fc4c02]) — see Strava_Guidelines.md.
+ * ========================================================================== */
+
+@import "./tokens.css";
+@import "tailwindcss";
+
+@theme {
+  /* -- Color → bg-* / text-* / border-* ----------------------------------- */
+  --color-background: var(--sv-sys-color-background);
+  --color-surface: var(--sv-sys-color-surface);
+  --color-surface-elevated: var(--sv-sys-color-surface-elevated);
+
+  --color-primary: var(--sv-sys-color-primary);
+  --color-primary-hover: var(--sv-sys-color-primary-hover);
+  --color-primary-pressed: var(--sv-sys-color-primary-pressed);
+  --color-primary-disabled: var(--sv-sys-color-primary-disabled);
+
+  --color-on-primary: var(--sv-sys-color-on-primary);
+  --color-on-primary-disabled: var(--sv-sys-color-on-primary-disabled);
+  --color-on-surface: var(--sv-sys-color-on-surface);
+  --color-on-surface-variant: var(--sv-sys-color-on-surface-variant);
+  --color-on-surface-muted: var(--sv-sys-color-on-surface-muted);
+
+  --color-border-subtle: var(--sv-sys-color-border-subtle);
+  --color-border-default: var(--sv-sys-color-border-default);
+  --color-border-focus: var(--sv-sys-color-border-focus);
+
+  --color-success: var(--sv-sys-color-success);
+  --color-warning: var(--sv-sys-color-warning);
+  --color-error: var(--sv-sys-color-error);
+
+  --color-placeholder: var(--sv-sys-color-placeholder);
+
+  /* -- Radius → rounded-* -------------------------------------------------- */
+  --radius-xs: var(--sv-sys-shape-corner-radius-xs);
+  --radius-sm: var(--sv-sys-shape-corner-radius-sm);
+  --radius-md: var(--sv-sys-shape-corner-radius-md);
+  --radius-lg: var(--sv-sys-shape-corner-radius-lg);
+  --radius-xl: var(--sv-sys-shape-corner-radius-xl);
+  --radius-full: var(--sv-sys-shape-corner-radius-full);
+
+  /* -- Spacing → p-* / gap-* / m-* (named semantic scale) ------------------ */
+  --spacing-xs: var(--sv-sys-spacing-padding-xs);    /* 4  */
+  --spacing-sm: var(--sv-sys-spacing-padding-sm);    /* 8  */
+  --spacing-md: var(--sv-sys-spacing-padding-md);    /* 12 */
+  --spacing-lg: var(--sv-sys-spacing-padding-lg);    /* 16 */
+  --spacing-xl: var(--sv-sys-spacing-padding-xl);    /* 20 */
+  --spacing-2xl: var(--sv-sys-spacing-padding-2xl);  /* 32 */
+  --spacing-inset-x: var(--sv-sys-spacing-padding-horizontal); /* 24 — default L/R */
+  --spacing-inset-y: var(--sv-sys-spacing-padding-vertical);   /* 10 — default T/B */
+  --spacing-cluster: var(--sv-sys-spacing-gap-default);        /* 10 — icon ↔ label */
+
+  /* -- Typescale → text-* (groups size + line-height + weight) ------------- */
+  --text-label-small: var(--sv-sys-typescale-label-small-font-size);
+  --text-label-small--line-height: var(--sv-sys-typescale-label-small-line-height);
+  --text-label-small--font-weight: var(--sv-sys-typescale-label-small-font-weight);
+
+  --text-label-medium: var(--sv-sys-typescale-label-medium-font-size);
+  --text-label-medium--line-height: var(--sv-sys-typescale-label-medium-line-height);
+  --text-label-medium--font-weight: var(--sv-sys-typescale-label-medium-font-weight);
+
+  --text-label-large: var(--sv-sys-typescale-label-large-font-size);
+  --text-label-large--line-height: var(--sv-sys-typescale-label-large-line-height);
+  --text-label-large--font-weight: var(--sv-sys-typescale-label-large-font-weight);
+
+  --text-body: var(--sv-sys-typescale-body-font-size);
+  --text-body--line-height: var(--sv-sys-typescale-body-line-height);
+  --text-body--font-weight: var(--sv-sys-typescale-body-font-weight);
+
+  --text-numeric: var(--sv-sys-typescale-numeric-display-font-size);
+  --text-numeric--line-height: var(--sv-sys-typescale-numeric-display-line-height);
+  --text-numeric--font-weight: var(--sv-sys-typescale-numeric-display-font-weight);
+}
+
+/* -- Base ----------------------------------------------------------------- */
+@layer base {
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-on-surface);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* -- Shared interaction primitives ---------------------------------------- *
+ * Focus ring kept as a token-exact CSS utility (offset/width come straight
+ * from tokens). Add `sv-focus-ring` to any interactive element.            */
+@layer components {
+  .sv-focus-ring:focus-visible {
+    outline: var(--sv-sys-shape-border-width-focus) solid var(--sv-sys-color-border-focus);
+    outline-offset: var(--sv-sys-spacing-padding-xs);
+  }
+}

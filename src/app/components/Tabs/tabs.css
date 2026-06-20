@@ -1,0 +1,51 @@
+/* =============================================================================
+ * Tabs — 分頁導覽（底線指示器）
+ * 引用層級：comp.tabs.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.tabs__list {
+  display: flex;
+  gap: var(--sv-comp-tabs-list-gap);
+  border-bottom: var(--sv-comp-tabs-list-border-width) solid var(--sv-comp-tabs-list-border-color);
+}
+
+.tabs__tab {
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
+  padding: var(--sv-comp-tabs-tab-padding-y) var(--sv-comp-tabs-tab-padding-x);
+  color: var(--sv-comp-tabs-tab-label-color-default);
+  font-size:   var(--sv-comp-tabs-label-font-size);
+  line-height: var(--sv-comp-tabs-label-line-height);
+  font-weight: var(--sv-comp-tabs-label-font-weight);
+
+  /* Indicator lives on the bottom border; overlap the list border. */
+  border-bottom: var(--sv-comp-tabs-indicator-size) solid transparent;
+  margin-bottom: calc(var(--sv-comp-tabs-list-border-width) * -1);
+
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.tabs__tab:hover:not(:disabled) {
+  color: var(--sv-comp-tabs-tab-label-color-selected);
+}
+
+.tabs__tab[aria-selected="true"] {
+  color: var(--sv-comp-tabs-tab-label-color-selected);
+  border-bottom-color: var(--sv-comp-tabs-indicator-color);
+}
+
+.tabs__tab:disabled {
+  color: var(--sv-comp-tabs-tab-label-color-disabled);
+  cursor: not-allowed;
+}
+
+.tabs__panel {
+  padding-top: var(--sv-comp-tabs-panel-padding);
+  color: var(--sv-sys-color-on-surface-variant);
+  font-size:   var(--sv-sys-typescale-body-font-size);
+  line-height: var(--sv-sys-typescale-body-line-height);
+}

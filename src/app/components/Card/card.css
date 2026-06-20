@@ -1,0 +1,26 @@
+/* =============================================================================
+ * Card — 基於 Design Tokens 的標準實作
+ * 引用層級：comp.* → sys.*；嚴禁直接使用 ref.*
+ * 設計原則：深色主題優先以背景層次（surface）取代邊框。
+ * ========================================================================== */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-comp-card-item-spacing);
+
+  background-color: var(--sv-comp-card-background);
+  border-radius: var(--sv-comp-card-corner-radius);
+  border: var(--sv-comp-card-border-width) solid var(--sv-comp-card-border-color);
+
+  padding-left:   var(--sv-comp-card-padding-left);
+  padding-right:  var(--sv-comp-card-padding-right);
+  padding-top:    var(--sv-comp-card-padding-top);
+  padding-bottom: var(--sv-comp-card-padding-bottom);
+}
+
+/* Elevated — for content that needs to read above the base surface
+ * (e.g. inside a modal, popover, or sticky region). */
+.card--elevated {
+  background-color: var(--sv-comp-card-background-elevated);
+}

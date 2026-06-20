@@ -1,0 +1,56 @@
+/* =============================================================================
+ * Input — 基於 Design Tokens 的標準實作
+ * 引用層級：comp.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* Surface + Shape */
+  background-color: var(--sv-comp-input-background);
+  border-radius: var(--sv-comp-input-corner-radius);
+  border: var(--sv-comp-input-border-width-default) solid var(--sv-comp-input-border-color-default);
+
+  /* Spacing */
+  padding-left:   var(--sv-comp-input-padding-left);
+  padding-right:  var(--sv-comp-input-padding-right);
+  padding-top:    var(--sv-comp-input-padding-top);
+  padding-bottom: var(--sv-comp-input-padding-bottom);
+
+  /* Typography */
+  color:       var(--sv-comp-input-text-color);
+  font-size:   var(--sv-comp-input-font-size);
+  line-height: var(--sv-comp-input-line-height);
+  font-family: inherit;
+
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.input::placeholder {
+  color: var(--sv-comp-input-placeholder-color);
+}
+
+/* Focus — switch border to focus color; box-shadow adds the extra ring width
+ * so the focused field does not shift its layout box. */
+.input:focus {
+  border-color: var(--sv-comp-input-border-color-focus);
+  box-shadow: 0 0 0 calc(var(--sv-comp-input-border-width-focus) - var(--sv-comp-input-border-width-default))
+    var(--sv-comp-input-border-color-focus);
+}
+
+.input:disabled {
+  background-color: var(--sv-sys-color-primary-disabled);
+  color: var(--sv-sys-color-on-primary-disabled);
+  cursor: not-allowed;
+}
+
+/* Error state — overrides default + focus border colors. */
+.input--error,
+.input--error:focus {
+  border-color: var(--sv-comp-input-border-color-error);
+  box-shadow: 0 0 0 calc(var(--sv-comp-input-border-width-focus) - var(--sv-comp-input-border-width-default))
+    var(--sv-comp-input-border-color-error);
+}

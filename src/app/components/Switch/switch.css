@@ -1,0 +1,73 @@
+/* =============================================================================
+ * Switch — 開關（保留原生 input[role=switch] 以維持無障礙）
+ * 引用層級：comp.switch.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sv-comp-switch-item-spacing);
+  cursor: pointer;
+
+  color:       var(--sv-comp-switch-label-color);
+  font-size:   var(--sv-comp-switch-label-font-size);
+  line-height: var(--sv-comp-switch-label-line-height);
+  font-weight: var(--sv-comp-switch-label-font-weight);
+}
+
+.switch__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  margin: 0;
+}
+
+.switch__track {
+  flex: none;
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width:  var(--sv-comp-switch-track-width);
+  height: var(--sv-comp-switch-track-height);
+  border-radius: var(--sv-comp-switch-corner-radius);
+  background-color: var(--sv-comp-switch-track-background-off);
+  transition: background-color 120ms ease;
+}
+
+.switch__thumb {
+  position: absolute;
+  top: var(--sv-comp-switch-track-padding);
+  left: var(--sv-comp-switch-track-padding);
+  width:  var(--sv-comp-switch-thumb-size);
+  height: var(--sv-comp-switch-thumb-size);
+  border-radius: var(--sv-comp-switch-corner-radius);
+  background-color: var(--sv-comp-switch-thumb-color);
+  transition: transform 120ms ease;
+}
+
+/* On — recolor track and slide thumb to the right edge. */
+.switch__input:checked + .switch__track {
+  background-color: var(--sv-comp-switch-track-background-on);
+}
+.switch__input:checked + .switch__track .switch__thumb {
+  transform: translateX(
+    calc(
+      var(--sv-comp-switch-track-width) - var(--sv-comp-switch-thumb-size) -
+        var(--sv-comp-switch-track-padding) * 2
+    )
+  );
+}
+
+.switch__input:focus-visible + .switch__track {
+  outline: var(--sv-sys-shape-border-width-focus) solid var(--sv-sys-color-border-focus);
+  outline-offset: var(--sv-sys-spacing-padding-xs);
+}
+
+.switch__input:disabled + .switch__track {
+  background-color: var(--sv-comp-switch-track-background-disabled);
+}
+.switch--disabled {
+  cursor: not-allowed;
+  color: var(--sv-comp-switch-label-color-disabled);
+}

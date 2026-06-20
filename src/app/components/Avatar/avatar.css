@@ -1,0 +1,35 @@
+/* =============================================================================
+ * Avatar — 頭像（圓形，圖片或姓名縮寫 fallback）
+ * 引用層級：comp.avatar.* → sys.*；嚴禁直接使用 ref.*
+ * 注意：font-size 設為頭像尺寸，縮寫文字以 em 相對縮放，避免每個尺寸各開 token。
+ * ========================================================================== */
+
+.avatar {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  border-radius: var(--sv-comp-avatar-corner-radius);
+  background-color: var(--sv-comp-avatar-background);
+  color: var(--sv-comp-avatar-text-color);
+  font-weight: var(--sv-comp-avatar-text-weight);
+  line-height: 1;
+}
+
+.avatar--sm { width: var(--sv-comp-avatar-size-sm); height: var(--sv-comp-avatar-size-sm); font-size: var(--sv-comp-avatar-size-sm); }
+.avatar--md { width: var(--sv-comp-avatar-size-md); height: var(--sv-comp-avatar-size-md); font-size: var(--sv-comp-avatar-size-md); }
+.avatar--lg { width: var(--sv-comp-avatar-size-lg); height: var(--sv-comp-avatar-size-lg); font-size: var(--sv-comp-avatar-size-lg); }
+
+.avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar__initials {
+  font-size: 0.4em;  /* relative to avatar size */
+  user-select: none;
+}

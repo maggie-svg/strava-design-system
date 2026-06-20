@@ -1,0 +1,50 @@
+/* =============================================================================
+ * Textarea — 多行文字輸入
+ * 引用層級：comp.textarea.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: var(--sv-comp-textarea-min-height);
+  resize: vertical;
+
+  background-color: var(--sv-comp-textarea-background);
+  border-radius: var(--sv-comp-textarea-corner-radius);
+  border: var(--sv-comp-textarea-border-width-default) solid var(--sv-comp-textarea-border-color-default);
+
+  padding: var(--sv-comp-textarea-padding-y) var(--sv-comp-textarea-padding-x);
+
+  color:       var(--sv-comp-textarea-text-color);
+  font-size:   var(--sv-comp-textarea-font-size);
+  line-height: var(--sv-comp-textarea-line-height);
+  font-family: inherit;
+
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.textarea::placeholder {
+  color: var(--sv-comp-textarea-placeholder-color);
+}
+
+.textarea:focus {
+  border-color: var(--sv-comp-textarea-border-color-focus);
+  box-shadow: 0 0 0 calc(var(--sv-comp-textarea-border-width-focus) - var(--sv-comp-textarea-border-width-default))
+    var(--sv-comp-textarea-border-color-focus);
+}
+
+.textarea:disabled {
+  background-color: var(--sv-sys-color-primary-disabled);
+  color: var(--sv-sys-color-on-primary-disabled);
+  cursor: not-allowed;
+  resize: none;
+}
+
+.textarea--error,
+.textarea--error:focus {
+  border-color: var(--sv-comp-textarea-border-color-error);
+  box-shadow: 0 0 0 calc(var(--sv-comp-textarea-border-width-focus) - var(--sv-comp-textarea-border-width-default))
+    var(--sv-comp-textarea-border-color-error);
+}

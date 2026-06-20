@@ -1,0 +1,546 @@
+/* =============================================================================
+ * Design Tokens — CSS Variables
+ * -----------------------------------------------------------------------------
+ * 三層架構：
+ *   ref  (Reference / Primitive) — 原子值，不直接使用於元件
+ *   sys  (System / Semantic)     — 語意化角色，UI 開發優先使用
+ *   comp (Component)             — 元件專屬 token，與特定元件綁定
+ *
+ * 命名規則： --sv-{layer}-{category}-{name}-{variant}
+ * 使用建議： 一般 UI 開發請優先使用 sys.* 與 comp.* ，避免直接引用 ref.*
+ * ========================================================================== */
+
+:root {
+  /* ===========================================================================
+   * REF / Color — 基礎色票（原子層）
+   * 直接定義色階，不帶語意。請勿直接用於元件，改用 sys.color.*
+   * ======================================================================== */
+
+  /* -- Base ----------------------------------------------------------------- */
+  --sv-ref-color-white: #ffffff;          /* 純白 */
+  --sv-ref-color-black: #000000;          /* 純黑 */
+
+  /* -- Neutral / 灰階 (深色主題基礎)
+   * 950 為主背景、800 為卡片表面、700 為提升層級的表面，300/400 為次要文字 */
+  --sv-ref-color-neutral-50:  #f5f5f5;
+  --sv-ref-color-neutral-100: #e0e0e0;
+  --sv-ref-color-neutral-200: #bdbdbd;
+  --sv-ref-color-neutral-300: #9e9e9e;
+  --sv-ref-color-neutral-400: #757575;
+  --sv-ref-color-neutral-500: #616161;
+  --sv-ref-color-neutral-600: #424242;
+  --sv-ref-color-neutral-700: #333333;
+  --sv-ref-color-neutral-800: #2a2a2a;
+  --sv-ref-color-neutral-900: #1a1a1a;
+  --sv-ref-color-neutral-950: #121212;
+
+  /* -- Orange / 品牌主色色階
+   * 500 為品牌核心色（Strava-like #FC4C02），用於 CTA、強調與圖表 */
+  --sv-ref-color-orange-50:  #fff0e6;
+  --sv-ref-color-orange-100: #ffd6bd;
+  --sv-ref-color-orange-200: #ffb78c;
+  --sv-ref-color-orange-300: #ff935c;
+  --sv-ref-color-orange-400: #ff6f31;
+  --sv-ref-color-orange-500: #fc4c02;
+  --sv-ref-color-orange-600: #e04000;
+  --sv-ref-color-orange-700: #bc3600;
+  --sv-ref-color-orange-800: #962b00;
+  --sv-ref-color-orange-900: #702000;
+
+  /* -- Green / 綠色色階（語意上對應 success） */
+  --sv-ref-color-green-100: #d1f0d7;
+  --sv-ref-color-green-300: #72cf80;
+  --sv-ref-color-green-500: #2eaf46;
+  --sv-ref-color-green-700: #1b7b2f;
+  --sv-ref-color-green-900: #0d471a;
+
+  /* -- Yellow / 黃色色階（語意上對應 warning） */
+  --sv-ref-color-yellow-100: #ffeec4;
+  --sv-ref-color-yellow-300: #ffc85f;
+  --sv-ref-color-yellow-500: #f39c12;
+  --sv-ref-color-yellow-700: #b46e08;
+  --sv-ref-color-yellow-900: #673f04;
+
+  /* -- Red / 紅色色階（語意上對應 error / destructive） */
+  --sv-ref-color-red-100: #ffd7d7;
+  --sv-ref-color-red-300: #f77070;
+  --sv-ref-color-red-500: #dc2626;
+  --sv-ref-color-red-700: #9f1717;
+  --sv-ref-color-red-900: #5c0d0d;
+
+  /* -- Transparent White / 透明白
+   * 用於深色背景上的微妙分隔線、Overlay；以「以深取代框線」原則為主 */
+  --sv-ref-color-transparent-white-08: rgba(255 255 255 / 0.08);  /* 極淡分隔線 */
+  --sv-ref-color-transparent-white-10: rgba(255 255 255 / 0.10);  /* 一般 border */
+  --sv-ref-color-transparent-white-60: rgba(255 255 255 / 0.60);  /* 次要文字/icon */
+
+  /* -- Transparent Black / 透明黑（用於 Modal scrim / 遮罩） */
+  --sv-ref-color-transparent-black-60: rgba(0 0 0 / 0.60);
+
+  /* ===========================================================================
+   * REF / Number — 基礎數值（原子層）
+   * 數值原子，不帶語意角色。請勿直接用於元件，改用 sys.* 對應的語意 token
+   * ======================================================================== */
+
+  /* -- Radius / 圓角刻度 ---------------------------------------------------- */
+  --sv-ref-number-radius-none: 0px;
+  --sv-ref-number-radius-xs:   4px;
+  --sv-ref-number-radius-sm:   8px;
+  --sv-ref-number-radius-md:   12px;
+  --sv-ref-number-radius-lg:   16px;
+  --sv-ref-number-radius-xl:   24px;
+  --sv-ref-number-radius-full: 999px;     /* 藥丸/圓形 */
+
+  /* -- Border Width / 邊框粗細 ---------------------------------------------- */
+  --sv-ref-number-border-width-none:     0px;
+  --sv-ref-number-border-width-hairline: 1px;   /* 一般邊框 */
+  --sv-ref-number-border-width-thin:     2px;   /* Focus 強調 */
+  --sv-ref-number-border-width-thick:    4px;   /* 特殊強調 */
+
+  /* -- Padding / 間距刻度 (4px base) ---------------------------------------- */
+  --sv-ref-number-padding-0:  0px;
+  --sv-ref-number-padding-2:  2px;
+  --sv-ref-number-padding-4:  4px;
+  --sv-ref-number-padding-8:  8px;
+  --sv-ref-number-padding-10: 10px;
+  --sv-ref-number-padding-12: 12px;
+  --sv-ref-number-padding-16: 16px;
+  --sv-ref-number-padding-20: 20px;
+  --sv-ref-number-padding-24: 24px;
+  --sv-ref-number-padding-32: 32px;
+  --sv-ref-number-padding-40: 40px;
+  --sv-ref-number-padding-48: 48px;
+
+  /* -- Font Size / 字級刻度 ------------------------------------------------- */
+  --sv-ref-number-font-size-12: 12px;
+  --sv-ref-number-font-size-14: 14px;
+  --sv-ref-number-font-size-16: 16px;
+  --sv-ref-number-font-size-20: 20px;
+  --sv-ref-number-font-size-24: 24px;
+  --sv-ref-number-font-size-32: 32px;
+  --sv-ref-number-font-size-48: 48px;
+
+  /* -- Line Height / 行高刻度 ----------------------------------------------- */
+  --sv-ref-number-line-height-16: 16px;
+  --sv-ref-number-line-height-20: 20px;
+  --sv-ref-number-line-height-24: 24px;
+  --sv-ref-number-line-height-28: 28px;
+  --sv-ref-number-line-height-32: 32px;
+  --sv-ref-number-line-height-36: 36px;
+  --sv-ref-number-line-height-56: 56px;
+
+  /* -- Font Weight / 字重 --------------------------------------------------- */
+  --sv-ref-number-font-weight-regular: 400;     /* 內文 */
+  --sv-ref-number-font-weight-medium:  500;     /* 標籤/按鈕 */
+  --sv-ref-number-font-weight-bold:    700;     /* 標題 */
+  --sv-ref-number-font-weight-black:   900;     /* 數據強調 (距離/時間) */
+
+  /* ===========================================================================
+   * SYS / Color — 語意色彩（語意層）
+   * 以「角色」為命名核心，UI 與元件應優先使用此層
+   * ======================================================================== */
+
+  /* -- Surface / 表面層 ----------------------------------------------------- */
+  --sv-sys-color-background:        var(--sv-ref-color-neutral-950);  /* 主背景（最深） */
+  --sv-sys-color-surface:           var(--sv-ref-color-neutral-800);  /* 卡片/容器表面 */
+  --sv-sys-color-surface-elevated:  var(--sv-ref-color-neutral-700);  /* 浮起層級（如 Modal） */
+
+  /* -- Primary / 品牌主互動色 ---------------------------------------------- */
+  --sv-sys-color-primary:           var(--sv-ref-color-orange-500);   /* 預設 */
+  --sv-sys-color-primary-hover:     var(--sv-ref-color-orange-400);   /* Hover 提亮 */
+  --sv-sys-color-primary-pressed:   var(--sv-ref-color-orange-600);   /* Pressed 加深 */
+  --sv-sys-color-primary-disabled:  var(--sv-ref-color-neutral-700);  /* Disabled 灰階 */
+
+  /* -- On-* / 前景色 (放在對應背景上的文字/icon) --------------------------- */
+  --sv-sys-color-on-primary:          var(--sv-ref-color-white);         /* 在 primary 上 */
+  --sv-sys-color-on-primary-disabled: var(--sv-ref-color-neutral-400);   /* disabled 文字 */
+  --sv-sys-color-on-surface:          var(--sv-ref-color-white);         /* 主要文字 */
+  --sv-sys-color-on-surface-variant:  var(--sv-ref-color-neutral-300);   /* 次要文字 */
+  --sv-sys-color-on-surface-muted:    var(--sv-ref-color-neutral-400);   /* 輔助/說明文字 */
+
+  /* -- Border / 分隔線
+   * 深色主題下盡量以背景層次取代邊框；如需邊框，使用以下低對比色 */
+  --sv-sys-color-border-subtle:   var(--sv-ref-color-transparent-white-08);  /* 極淡分隔 */
+  --sv-sys-color-border-default:  var(--sv-ref-color-transparent-white-10);  /* 一般邊框 */
+  --sv-sys-color-border-focus:    var(--sv-ref-color-orange-500);            /* Focus Ring */
+
+  /* -- Status / 狀態色 ------------------------------------------------------ */
+  --sv-sys-color-success:  var(--sv-ref-color-green-500);   /* 成功/完成 */
+  --sv-sys-color-warning:  var(--sv-ref-color-yellow-500);  /* 警告 */
+  --sv-sys-color-error:    var(--sv-ref-color-red-500);     /* 錯誤/破壞性 */
+
+  /* -- Misc ----------------------------------------------------------------- */
+  --sv-sys-color-placeholder: var(--sv-ref-color-neutral-400);  /* Input 佔位文字 */
+  --sv-sys-color-scrim:       var(--sv-ref-color-transparent-black-60);  /* Modal 遮罩 */
+
+  /* ===========================================================================
+   * SYS / Shape — 形狀（圓角、邊框）
+   * ======================================================================== */
+
+  /* -- Corner Radius / 語意圓角
+   * none/xs/sm 用於小型 UI；md/lg 用於卡片區塊；xl 用於大型容器；full 用於藥丸/CTA */
+  --sv-sys-shape-corner-radius-none: var(--sv-ref-number-radius-none);
+  --sv-sys-shape-corner-radius-xs:   var(--sv-ref-number-radius-xs);
+  --sv-sys-shape-corner-radius-sm:   var(--sv-ref-number-radius-sm);
+  --sv-sys-shape-corner-radius-md:   var(--sv-ref-number-radius-md);
+  --sv-sys-shape-corner-radius-lg:   var(--sv-ref-number-radius-lg);
+  --sv-sys-shape-corner-radius-xl:   var(--sv-ref-number-radius-xl);
+  --sv-sys-shape-corner-radius-full: var(--sv-ref-number-radius-full);
+
+  /* -- Border Width / 語意邊框寬度 ----------------------------------------- */
+  --sv-sys-shape-border-width-none:    var(--sv-ref-number-border-width-none);
+  --sv-sys-shape-border-width-default: var(--sv-ref-number-border-width-hairline);
+  --sv-sys-shape-border-width-focus:   var(--sv-ref-number-border-width-thin);
+
+  /* ===========================================================================
+   * SYS / Spacing — 間距（內距、Gap）
+   * ======================================================================== */
+
+  /* -- Padding / 容器內距 --------------------------------------------------- */
+  --sv-sys-spacing-padding-horizontal: var(--sv-ref-number-padding-24);  /* 預設左右 */
+  --sv-sys-spacing-padding-vertical:   var(--sv-ref-number-padding-10);  /* 預設上下 */
+  --sv-sys-spacing-padding-xs:  var(--sv-ref-number-padding-4);
+  --sv-sys-spacing-padding-sm:  var(--sv-ref-number-padding-8);
+  --sv-sys-spacing-padding-md:  var(--sv-ref-number-padding-12);
+  --sv-sys-spacing-padding-lg:  var(--sv-ref-number-padding-16);
+  --sv-sys-spacing-padding-xl:  var(--sv-ref-number-padding-20);
+  --sv-sys-spacing-padding-2xl: var(--sv-ref-number-padding-32);
+
+  /* -- Gap / Flex/Grid 間距 ------------------------------------------------- */
+  --sv-sys-spacing-gap-default: var(--sv-ref-number-padding-10);
+  --sv-sys-spacing-gap-xs: var(--sv-ref-number-padding-4);
+  --sv-sys-spacing-gap-sm: var(--sv-ref-number-padding-8);
+  --sv-sys-spacing-gap-md: var(--sv-ref-number-padding-16);
+  --sv-sys-spacing-gap-lg: var(--sv-ref-number-padding-24);
+
+  /* ===========================================================================
+   * SYS / Typescale — 字級組合
+   * 每個 typescale 包含 font-size / line-height / font-weight 三屬性
+   * ======================================================================== */
+
+  /* -- Label Small / 12px / 400 — 小標籤、metadata、輔助文字 */
+  --sv-sys-typescale-label-small-font-size:   var(--sv-ref-number-font-size-12);
+  --sv-sys-typescale-label-small-line-height: var(--sv-ref-number-line-height-16);
+  --sv-sys-typescale-label-small-font-weight: var(--sv-ref-number-font-weight-regular);
+
+  /* -- Label Medium / 14px / 500 — 一般按鈕標籤、表單欄位標題 */
+  --sv-sys-typescale-label-medium-font-size:   var(--sv-ref-number-font-size-14);
+  --sv-sys-typescale-label-medium-line-height: var(--sv-ref-number-line-height-20);
+  --sv-sys-typescale-label-medium-font-weight: var(--sv-ref-number-font-weight-medium);
+
+  /* -- Label Large / 24px / 500 — 大型 CTA、頁面標題 */
+  --sv-sys-typescale-label-large-font-size:   var(--sv-ref-number-font-size-24);
+  --sv-sys-typescale-label-large-line-height: var(--sv-ref-number-line-height-36);
+  --sv-sys-typescale-label-large-font-weight: var(--sv-ref-number-font-weight-medium);
+
+  /* -- Body / 16px / 400 — 內文段落、Input 文字 */
+  --sv-sys-typescale-body-font-size:   var(--sv-ref-number-font-size-16);
+  --sv-sys-typescale-body-line-height: var(--sv-ref-number-line-height-24);
+  --sv-sys-typescale-body-font-weight: var(--sv-ref-number-font-weight-regular);
+
+  /* -- Numeric Display / 48px / 900 — 距離/時間/配速等核心數據展示 */
+  --sv-sys-typescale-numeric-display-font-size:   var(--sv-ref-number-font-size-48);
+  --sv-sys-typescale-numeric-display-line-height: var(--sv-ref-number-line-height-56);
+  --sv-sys-typescale-numeric-display-font-weight: var(--sv-ref-number-font-weight-black);
+
+  /* ===========================================================================
+   * COMP / Button — 主要 CTA 按鈕（藥丸形）
+   * ======================================================================== */
+  --sv-comp-button-corner-radius:  var(--sv-sys-shape-corner-radius-full);
+  --sv-comp-button-padding-left:   var(--sv-sys-spacing-padding-horizontal);
+  --sv-comp-button-padding-right:  var(--sv-sys-spacing-padding-horizontal);
+  --sv-comp-button-padding-top:    var(--sv-sys-spacing-padding-vertical);
+  --sv-comp-button-padding-bottom: var(--sv-sys-spacing-padding-vertical);
+  --sv-comp-button-item-spacing:   var(--sv-sys-spacing-gap-default);  /* icon ↔ label */
+
+  /* Background — 互動四態 */
+  --sv-comp-button-background-default:  var(--sv-sys-color-primary);
+  --sv-comp-button-background-hover:    var(--sv-sys-color-primary-hover);
+  --sv-comp-button-background-pressed:  var(--sv-sys-color-primary-pressed);
+  --sv-comp-button-background-disabled: var(--sv-sys-color-primary-disabled);
+
+  /* Label / 文字 */
+  --sv-comp-button-label-text-color:          var(--sv-sys-color-on-primary);
+  --sv-comp-button-label-text-color-disabled: var(--sv-sys-color-on-primary-disabled);
+  --sv-comp-button-label-font-size:           var(--sv-sys-typescale-label-large-font-size);
+  --sv-comp-button-label-line-height:         var(--sv-sys-typescale-label-large-line-height);
+  --sv-comp-button-label-font-weight:         var(--sv-sys-typescale-label-large-font-weight);
+
+  /* ===========================================================================
+   * COMP / Input — 文字輸入欄位
+   * ======================================================================== */
+  --sv-comp-input-corner-radius:       var(--sv-sys-shape-corner-radius-full);
+  --sv-comp-input-background:          var(--sv-sys-color-surface);
+
+  /* Border 三態（default / focus / error） */
+  --sv-comp-input-border-color-default: var(--sv-sys-color-border-default);
+  --sv-comp-input-border-color-focus:   var(--sv-sys-color-border-focus);
+  --sv-comp-input-border-color-error:   var(--sv-sys-color-error);
+  --sv-comp-input-border-width-default: var(--sv-sys-shape-border-width-default);
+  --sv-comp-input-border-width-focus:   var(--sv-sys-shape-border-width-focus);
+
+  /* Text */
+  --sv-comp-input-text-color:        var(--sv-sys-color-on-surface);
+  --sv-comp-input-placeholder-color: var(--sv-sys-color-placeholder);
+
+  /* Padding */
+  --sv-comp-input-padding-left:   var(--sv-sys-spacing-padding-lg);
+  --sv-comp-input-padding-right:  var(--sv-sys-spacing-padding-lg);
+  --sv-comp-input-padding-top:    var(--sv-sys-spacing-padding-md);
+  --sv-comp-input-padding-bottom: var(--sv-sys-spacing-padding-md);
+
+  /* Typography */
+  --sv-comp-input-font-size:   var(--sv-sys-typescale-body-font-size);
+  --sv-comp-input-line-height: var(--sv-sys-typescale-body-line-height);
+
+  /* ===========================================================================
+   * COMP / Card — 卡片容器（中等圓角，依靠背景層次而非邊框）
+   * ======================================================================== */
+  --sv-comp-card-background:          var(--sv-sys-color-surface);
+  --sv-comp-card-background-elevated: var(--sv-sys-color-surface-elevated);
+  --sv-comp-card-corner-radius:       var(--sv-sys-shape-corner-radius-md);
+  --sv-comp-card-border-color:        var(--sv-sys-color-border-subtle);
+  --sv-comp-card-border-width:        var(--sv-sys-shape-border-width-none);  /* 預設無邊框 */
+  --sv-comp-card-padding-left:   var(--sv-sys-spacing-padding-lg);
+  --sv-comp-card-padding-right:  var(--sv-sys-spacing-padding-lg);
+  --sv-comp-card-padding-top:    var(--sv-sys-spacing-padding-lg);
+  --sv-comp-card-padding-bottom: var(--sv-sys-spacing-padding-lg);
+  --sv-comp-card-item-spacing:   var(--sv-sys-spacing-gap-md);
+
+  /* ===========================================================================
+   * COMP / Badge — 狀態標籤（藥丸形）
+   * 深色主題策略：中性表面 + 語意色文字（避免依賴尚未定義的 on-status 前景色）
+   * ======================================================================== */
+  --sv-comp-badge-corner-radius: var(--sv-sys-shape-corner-radius-full);
+  --sv-comp-badge-padding-x:     var(--sv-sys-spacing-padding-sm);
+  --sv-comp-badge-padding-y:     var(--sv-sys-spacing-padding-xs);
+  --sv-comp-badge-item-spacing:  var(--sv-sys-spacing-gap-xs);  /* icon ↔ label */
+
+  /* Background — 所有 variant 共用中性浮起表面 */
+  --sv-comp-badge-background: var(--sv-sys-color-surface-elevated);
+
+  /* Label color — 依 variant 切換語意色 */
+  --sv-comp-badge-label-color-neutral: var(--sv-sys-color-on-surface-variant);
+  --sv-comp-badge-label-color-primary: var(--sv-sys-color-primary);
+  --sv-comp-badge-label-color-success: var(--sv-sys-color-success);
+  --sv-comp-badge-label-color-warning: var(--sv-sys-color-warning);
+  --sv-comp-badge-label-color-error:   var(--sv-sys-color-error);
+
+  /* Typography — label-small 三屬性成組（12 / 16 / 400） */
+  --sv-comp-badge-label-font-size:   var(--sv-sys-typescale-label-small-font-size);
+  --sv-comp-badge-label-line-height: var(--sv-sys-typescale-label-small-line-height);
+  --sv-comp-badge-label-font-weight: var(--sv-sys-typescale-label-small-font-weight);
+
+  /* ===========================================================================
+   * COMP / Checkbox — 自訂樣式核取方塊
+   * 註：尺寸暫借 sys.spacing.padding-xl (20px)，無對應 sys 尺寸刻度時的折衷。
+   * ======================================================================== */
+  --sv-comp-checkbox-size:          var(--sv-sys-spacing-padding-xl);          /* 20px 方塊邊長 */
+  --sv-comp-checkbox-corner-radius: var(--sv-sys-shape-corner-radius-sm);
+  --sv-comp-checkbox-border-width:  var(--sv-sys-shape-border-width-default);
+  --sv-comp-checkbox-item-spacing:  var(--sv-sys-spacing-gap-sm);              /* box ↔ label */
+
+  /* Background — 三態 */
+  --sv-comp-checkbox-background:          var(--sv-sys-color-surface);
+  --sv-comp-checkbox-background-checked:  var(--sv-sys-color-primary);
+  --sv-comp-checkbox-background-disabled: var(--sv-sys-color-primary-disabled);
+
+  /* Border — 三態 */
+  --sv-comp-checkbox-border-color-default:  var(--sv-sys-color-border-default);
+  --sv-comp-checkbox-border-color-checked:  var(--sv-sys-color-primary);
+  --sv-comp-checkbox-border-color-disabled: var(--sv-sys-color-border-subtle);
+
+  /* Checkmark + Label */
+  --sv-comp-checkbox-check-color:          var(--sv-sys-color-on-primary);
+  --sv-comp-checkbox-label-color:          var(--sv-sys-color-on-surface);
+  --sv-comp-checkbox-label-color-disabled: var(--sv-sys-color-on-surface-muted);
+
+  /* Typography — label-medium 三屬性成組（14 / 20 / 500） */
+  --sv-comp-checkbox-label-font-size:   var(--sv-sys-typescale-label-medium-font-size);
+  --sv-comp-checkbox-label-line-height: var(--sv-sys-typescale-label-medium-line-height);
+  --sv-comp-checkbox-label-font-weight: var(--sv-sys-typescale-label-medium-font-weight);
+
+  /* ===========================================================================
+   * COMP / Textarea — 多行文字輸入（中等圓角，非藥丸）
+   * ======================================================================== */
+  --sv-comp-textarea-corner-radius: var(--sv-sys-shape-corner-radius-md);
+  --sv-comp-textarea-background:    var(--sv-sys-color-surface);
+
+  --sv-comp-textarea-border-color-default: var(--sv-sys-color-border-default);
+  --sv-comp-textarea-border-color-focus:   var(--sv-sys-color-border-focus);
+  --sv-comp-textarea-border-color-error:   var(--sv-sys-color-error);
+  --sv-comp-textarea-border-width-default: var(--sv-sys-shape-border-width-default);
+  --sv-comp-textarea-border-width-focus:   var(--sv-sys-shape-border-width-focus);
+
+  --sv-comp-textarea-text-color:        var(--sv-sys-color-on-surface);
+  --sv-comp-textarea-placeholder-color: var(--sv-sys-color-placeholder);
+
+  --sv-comp-textarea-padding-x: var(--sv-sys-spacing-padding-lg);
+  --sv-comp-textarea-padding-y: var(--sv-sys-spacing-padding-md);
+
+  --sv-comp-textarea-font-size:   var(--sv-sys-typescale-body-font-size);
+  --sv-comp-textarea-line-height: var(--sv-sys-typescale-body-line-height);
+  --sv-comp-textarea-min-height:  calc(var(--sv-sys-typescale-body-line-height) * 4);  /* ~4 行 */
+
+  /* ===========================================================================
+   * COMP / Select — 下拉選單（藥丸形，含自訂 chevron）
+   * ======================================================================== */
+  --sv-comp-select-corner-radius: var(--sv-sys-shape-corner-radius-full);
+  --sv-comp-select-background:    var(--sv-sys-color-surface);
+
+  --sv-comp-select-border-color-default: var(--sv-sys-color-border-default);
+  --sv-comp-select-border-color-focus:   var(--sv-sys-color-border-focus);
+  --sv-comp-select-border-color-error:   var(--sv-sys-color-error);
+  --sv-comp-select-border-width-default: var(--sv-sys-shape-border-width-default);
+  --sv-comp-select-border-width-focus:   var(--sv-sys-shape-border-width-focus);
+
+  --sv-comp-select-text-color:    var(--sv-sys-color-on-surface);
+  --sv-comp-select-chevron-color: var(--sv-sys-color-on-surface-variant);
+
+  --sv-comp-select-padding-left:  var(--sv-sys-spacing-padding-lg);
+  --sv-comp-select-padding-right: var(--sv-sys-spacing-padding-2xl);  /* 預留 chevron 空間 */
+  --sv-comp-select-padding-y:     var(--sv-sys-spacing-padding-md);
+
+  --sv-comp-select-font-size:   var(--sv-sys-typescale-body-font-size);
+  --sv-comp-select-line-height: var(--sv-sys-typescale-body-line-height);
+
+  /* ===========================================================================
+   * COMP / Chip — 篩選標籤（藥丸形，可選取）
+   * ======================================================================== */
+  --sv-comp-chip-corner-radius: var(--sv-sys-shape-corner-radius-full);
+  --sv-comp-chip-padding-x:     var(--sv-sys-spacing-padding-md);
+  --sv-comp-chip-padding-y:     var(--sv-sys-spacing-padding-sm);
+  --sv-comp-chip-item-spacing:  var(--sv-sys-spacing-gap-xs);
+
+  --sv-comp-chip-background-default:  var(--sv-sys-color-surface-elevated);
+  --sv-comp-chip-background-hover:    var(--sv-sys-color-surface);
+  --sv-comp-chip-background-selected: var(--sv-sys-color-primary);
+
+  --sv-comp-chip-label-color-default:  var(--sv-sys-color-on-surface-variant);
+  --sv-comp-chip-label-color-selected: var(--sv-sys-color-on-primary);
+
+  --sv-comp-chip-label-font-size:   var(--sv-sys-typescale-label-medium-font-size);
+  --sv-comp-chip-label-line-height: var(--sv-sys-typescale-label-medium-line-height);
+  --sv-comp-chip-label-font-weight: var(--sv-sys-typescale-label-medium-font-weight);
+
+  /* ===========================================================================
+   * COMP / Switch — 開關（track + thumb）
+   * 幾何尺寸由 sys 刻度推導（無專屬尺寸刻度時的折衷）。
+   * ======================================================================== */
+  --sv-comp-switch-corner-radius: var(--sv-sys-shape-corner-radius-full);
+  --sv-comp-switch-track-width:   calc(var(--sv-sys-spacing-padding-lg) * 2 + var(--sv-sys-spacing-padding-xs) * 2);  /* 40 */
+  --sv-comp-switch-track-height:  var(--sv-sys-typescale-body-line-height);  /* 24 */
+  --sv-comp-switch-track-padding: var(--sv-sys-spacing-padding-xs);          /* 4  */
+  --sv-comp-switch-thumb-size:    var(--sv-sys-spacing-padding-lg);          /* 16 */
+
+  --sv-comp-switch-track-background-off:      var(--sv-sys-color-surface-elevated);
+  --sv-comp-switch-track-background-on:       var(--sv-sys-color-primary);
+  --sv-comp-switch-track-background-disabled: var(--sv-sys-color-primary-disabled);
+  --sv-comp-switch-thumb-color:               var(--sv-sys-color-on-primary);
+
+  --sv-comp-switch-item-spacing:    var(--sv-sys-spacing-gap-sm);  /* track ↔ label */
+  --sv-comp-switch-label-color:     var(--sv-sys-color-on-surface);
+  --sv-comp-switch-label-color-disabled: var(--sv-sys-color-on-surface-muted);
+  --sv-comp-switch-label-font-size:   var(--sv-sys-typescale-label-medium-font-size);
+  --sv-comp-switch-label-line-height: var(--sv-sys-typescale-label-medium-line-height);
+  --sv-comp-switch-label-font-weight: var(--sv-sys-typescale-label-medium-font-weight);
+
+  /* ===========================================================================
+   * COMP / Radio — 單選圓鈕（ring + inner dot）
+   * ======================================================================== */
+  --sv-comp-radio-size:         var(--sv-sys-spacing-padding-xl);  /* 20 */
+  --sv-comp-radio-border-width: var(--sv-sys-shape-border-width-default);
+  --sv-comp-radio-item-spacing: var(--sv-sys-spacing-gap-sm);
+
+  --sv-comp-radio-background:          var(--sv-sys-color-surface);
+  --sv-comp-radio-background-disabled: var(--sv-sys-color-primary-disabled);
+  --sv-comp-radio-border-color-default:  var(--sv-sys-color-border-default);
+  --sv-comp-radio-border-color-checked:  var(--sv-sys-color-primary);
+  --sv-comp-radio-border-color-disabled: var(--sv-sys-color-border-subtle);
+  --sv-comp-radio-dot-color:             var(--sv-sys-color-primary);
+
+  --sv-comp-radio-label-color:          var(--sv-sys-color-on-surface);
+  --sv-comp-radio-label-color-disabled: var(--sv-sys-color-on-surface-muted);
+  --sv-comp-radio-label-font-size:   var(--sv-sys-typescale-label-medium-font-size);
+  --sv-comp-radio-label-line-height: var(--sv-sys-typescale-label-medium-line-height);
+  --sv-comp-radio-label-font-weight: var(--sv-sys-typescale-label-medium-font-weight);
+
+  /* ===========================================================================
+   * COMP / Avatar — 頭像（圓形，圖片或姓名縮寫）
+   * 尺寸刻度由 sys 推導（無專屬尺寸刻度時的折衷）。
+   * ======================================================================== */
+  --sv-comp-avatar-size-sm: var(--sv-sys-typescale-body-line-height);                                  /* 24 */
+  --sv-comp-avatar-size-md: calc(var(--sv-sys-spacing-padding-2xl) + var(--sv-sys-spacing-padding-sm)); /* 40 */
+  --sv-comp-avatar-size-lg: calc(var(--sv-sys-spacing-padding-2xl) * 2);                                /* 64 */
+  --sv-comp-avatar-corner-radius: var(--sv-sys-shape-corner-radius-full);
+  --sv-comp-avatar-background:    var(--sv-sys-color-surface-elevated);  /* 縮寫 fallback 底色 */
+  --sv-comp-avatar-text-color:    var(--sv-sys-color-on-surface);
+  --sv-comp-avatar-text-weight:   var(--sv-sys-typescale-label-medium-font-weight);
+
+  /* ===========================================================================
+   * COMP / Tabs — 分頁導覽（底線指示器）
+   * ======================================================================== */
+  --sv-comp-tabs-list-gap:          var(--sv-sys-spacing-gap-lg);
+  --sv-comp-tabs-list-border-color: var(--sv-sys-color-border-subtle);
+  --sv-comp-tabs-list-border-width: var(--sv-sys-shape-border-width-default);
+
+  --sv-comp-tabs-tab-padding-x: var(--sv-sys-spacing-padding-sm);
+  --sv-comp-tabs-tab-padding-y: var(--sv-sys-spacing-padding-sm);
+
+  --sv-comp-tabs-tab-label-color-default:  var(--sv-sys-color-on-surface-variant);
+  --sv-comp-tabs-tab-label-color-selected: var(--sv-sys-color-on-surface);
+  --sv-comp-tabs-tab-label-color-disabled: var(--sv-sys-color-on-surface-muted);
+
+  --sv-comp-tabs-indicator-color: var(--sv-sys-color-primary);
+  --sv-comp-tabs-indicator-size:  var(--sv-sys-shape-border-width-focus);  /* 2px 底線 */
+
+  --sv-comp-tabs-label-font-size:   var(--sv-sys-typescale-label-medium-font-size);
+  --sv-comp-tabs-label-line-height: var(--sv-sys-typescale-label-medium-line-height);
+  --sv-comp-tabs-label-font-weight: var(--sv-sys-typescale-label-medium-font-weight);
+
+  --sv-comp-tabs-panel-padding: var(--sv-sys-spacing-padding-lg);
+
+  /* ===========================================================================
+   * COMP / Tooltip — 浮動提示（小型，label-small）
+   * ======================================================================== */
+  --sv-comp-tooltip-background:    var(--sv-sys-color-surface-elevated);
+  --sv-comp-tooltip-text-color:    var(--sv-sys-color-on-surface);
+  --sv-comp-tooltip-corner-radius: var(--sv-sys-shape-corner-radius-sm);
+  --sv-comp-tooltip-padding-x:     var(--sv-sys-spacing-padding-sm);
+  --sv-comp-tooltip-padding-y:     var(--sv-sys-spacing-padding-xs);
+  --sv-comp-tooltip-max-width:     calc(var(--sv-sys-spacing-padding-2xl) * 7);  /* ~224 */
+  --sv-comp-tooltip-font-size:   var(--sv-sys-typescale-label-small-font-size);
+  --sv-comp-tooltip-line-height: var(--sv-sys-typescale-label-small-line-height);
+  --sv-comp-tooltip-font-weight: var(--sv-sys-typescale-label-small-font-weight);
+
+  /* ===========================================================================
+   * COMP / Popover — 浮動面板（中等圓角 + 邊框分隔）
+   * ======================================================================== */
+  --sv-comp-popover-background:    var(--sv-sys-color-surface-elevated);
+  --sv-comp-popover-text-color:    var(--sv-sys-color-on-surface);
+  --sv-comp-popover-corner-radius: var(--sv-sys-shape-corner-radius-md);
+  --sv-comp-popover-border-color:  var(--sv-sys-color-border-default);
+  --sv-comp-popover-border-width:  var(--sv-sys-shape-border-width-default);
+  --sv-comp-popover-padding:       var(--sv-sys-spacing-padding-lg);
+  --sv-comp-popover-item-spacing:  var(--sv-sys-spacing-gap-md);
+  --sv-comp-popover-max-width:     calc(var(--sv-sys-spacing-padding-2xl) * 10);  /* ~320 */
+
+  /* ===========================================================================
+   * COMP / Modal — 對話框（置中，scrim 遮罩）
+   * ======================================================================== */
+  --sv-comp-modal-scrim:         var(--sv-sys-color-scrim);
+  --sv-comp-modal-background:    var(--sv-sys-color-surface-elevated);
+  --sv-comp-modal-corner-radius: var(--sv-sys-shape-corner-radius-lg);
+  --sv-comp-modal-padding:       var(--sv-sys-spacing-padding-xl);
+  --sv-comp-modal-item-spacing:  var(--sv-sys-spacing-gap-md);
+  --sv-comp-modal-max-width:     calc(var(--sv-sys-spacing-padding-2xl) * 15);  /* ~480 */
+
+  --sv-comp-modal-title-color:    var(--sv-sys-color-on-surface);
+  --sv-comp-modal-title-font-size:   var(--sv-sys-typescale-label-large-font-size);
+  --sv-comp-modal-title-line-height: var(--sv-sys-typescale-label-large-line-height);
+  --sv-comp-modal-title-font-weight: var(--sv-sys-typescale-label-large-font-weight);
+
+  --sv-comp-modal-body-color:       var(--sv-sys-color-on-surface-variant);
+  --sv-comp-modal-body-font-size:   var(--sv-sys-typescale-body-font-size);
+  --sv-comp-modal-body-line-height: var(--sv-sys-typescale-body-line-height);
+}

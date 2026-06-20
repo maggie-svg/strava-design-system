@@ -1,0 +1,50 @@
+/* =============================================================================
+ * Modal — 對話框（scrim 遮罩 + 置中）
+ * 引用層級：comp.modal.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.modal__scrim {
+  display: grid;
+  place-items: center;
+  padding: var(--sv-sys-spacing-padding-lg);
+  background-color: var(--sv-comp-modal-scrim);
+  z-index: 1000;
+}
+
+.modal__dialog {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--sv-comp-modal-max-width);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-comp-modal-item-spacing);
+
+  background-color: var(--sv-comp-modal-background);
+  border-radius: var(--sv-comp-modal-corner-radius);
+  padding: var(--sv-comp-modal-padding);
+}
+
+.modal__dialog:focus {
+  outline: none;
+}
+
+.modal__title {
+  margin: 0;
+  color: var(--sv-comp-modal-title-color);
+  font-size:   var(--sv-comp-modal-title-font-size);
+  line-height: var(--sv-comp-modal-title-line-height);
+  font-weight: var(--sv-comp-modal-title-font-weight);
+}
+
+.modal__body {
+  color: var(--sv-comp-modal-body-color);
+  font-size:   var(--sv-comp-modal-body-font-size);
+  line-height: var(--sv-comp-modal-body-line-height);
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sv-sys-spacing-gap-sm);
+}

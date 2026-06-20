@@ -1,0 +1,45 @@
+/* =============================================================================
+ * Chip — 篩選標籤（藥丸形，可選取）
+ * 引用層級：comp.chip.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sv-comp-chip-item-spacing);
+
+  border: var(--sv-sys-shape-border-width-default) solid transparent;
+  border-radius: var(--sv-comp-chip-corner-radius);
+  padding: var(--sv-comp-chip-padding-y) var(--sv-comp-chip-padding-x);
+
+  background-color: var(--sv-comp-chip-background-default);
+  color: var(--sv-comp-chip-label-color-default);
+
+  font-size:   var(--sv-comp-chip-label-font-size);
+  line-height: var(--sv-comp-chip-label-line-height);
+  font-weight: var(--sv-comp-chip-label-font-weight);
+  font-family: inherit;
+
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.chip:hover {
+  background-color: var(--sv-comp-chip-background-hover);
+}
+
+.chip--selected {
+  background-color: var(--sv-comp-chip-background-selected);
+  color: var(--sv-comp-chip-label-color-selected);
+}
+.chip--selected:hover {
+  background-color: var(--sv-comp-chip-background-selected);
+}
+
+.chip:disabled {
+  background-color: var(--sv-sys-color-primary-disabled);
+  color: var(--sv-sys-color-on-primary-disabled);
+  cursor: not-allowed;
+}

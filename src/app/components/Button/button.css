@@ -1,0 +1,105 @@
+/* =============================================================================
+ * Button — 基於 Design Tokens 的標準實作
+ * 引用層級：comp.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.btn {
+  /* Geometry */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sv-comp-button-item-spacing);
+  border: var(--sv-sys-shape-border-width-default) solid transparent;
+  border-radius: var(--sv-comp-button-corner-radius);
+
+  /* Spacing */
+  padding-left:   var(--sv-comp-button-padding-left);
+  padding-right:  var(--sv-comp-button-padding-right);
+  padding-top:    var(--sv-comp-button-padding-top);
+  padding-bottom: var(--sv-comp-button-padding-bottom);
+
+  /* Typography */
+  font-size:   var(--sv-comp-button-label-font-size);
+  line-height: var(--sv-comp-button-label-line-height);
+  font-weight: var(--sv-comp-button-label-font-weight);
+
+  /* Default colors (Primary) */
+  background-color: var(--sv-comp-button-background-default);
+  color:            var(--sv-comp-button-label-text-color);
+
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 120ms ease, color 120ms ease, transform 80ms ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+/* ---- States --------------------------------------------------------------- */
+.btn:hover    { background-color: var(--sv-comp-button-background-hover); }
+.btn:active   {
+  background-color: var(--sv-comp-button-background-pressed);
+  transform: scale(0.98);
+}
+.btn:focus-visible {
+  outline: var(--sv-sys-shape-border-width-focus) solid var(--sv-sys-color-border-focus);
+  outline-offset: var(--sv-sys-spacing-padding-xs);
+}
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  background-color: var(--sv-comp-button-background-disabled);
+  color:            var(--sv-comp-button-label-text-color-disabled);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---- Variants ------------------------------------------------------------- */
+.btn--primary {
+  background-color: var(--sv-comp-button-background-default);
+  color:            var(--sv-comp-button-label-text-color);
+}
+.btn--primary:hover  { background-color: var(--sv-comp-button-background-hover); }
+.btn--primary:active { background-color: var(--sv-comp-button-background-pressed); }
+
+.btn--secondary {
+  background-color: var(--sv-sys-color-surface-elevated);
+  color:            var(--sv-sys-color-on-surface);
+}
+.btn--secondary:hover  { background-color: var(--sv-sys-color-surface); }
+.btn--secondary:active { background-color: var(--sv-sys-color-surface-elevated); }
+
+.btn--ghost {
+  background-color: transparent;
+  color:            var(--sv-sys-color-on-surface);
+}
+.btn--ghost:hover  { background-color: var(--sv-sys-color-border-subtle); }
+.btn--ghost:active { background-color: var(--sv-sys-color-border-default); }
+
+.btn--destructive {
+  background-color: var(--sv-sys-color-error);
+  color:            var(--sv-sys-color-on-primary);
+}
+.btn--destructive:hover  { filter: brightness(1.08); }
+.btn--destructive:active { filter: brightness(0.92); }
+
+/* ---- Sizes ---------------------------------------------------------------- */
+.btn--sm {
+  padding-left:   var(--sv-sys-spacing-padding-lg);
+  padding-right:  var(--sv-sys-spacing-padding-lg);
+  padding-top:    var(--sv-sys-spacing-padding-sm);
+  padding-bottom: var(--sv-sys-spacing-padding-sm);
+  font-size:      var(--sv-sys-typescale-label-medium-font-size);
+  line-height:    var(--sv-sys-typescale-label-medium-line-height);
+  font-weight:    var(--sv-sys-typescale-label-medium-font-weight);
+}
+.btn--lg {
+  padding-left:   var(--sv-sys-spacing-padding-2xl);
+  padding-right:  var(--sv-sys-spacing-padding-2xl);
+  padding-top:    var(--sv-sys-spacing-padding-lg);
+  padding-bottom: var(--sv-sys-spacing-padding-lg);
+}
+
+/* ---- Icon-only ------------------------------------------------------------ */
+.btn--icon {
+  padding: var(--sv-sys-spacing-padding-md);
+  aspect-ratio: 1 / 1;
+}

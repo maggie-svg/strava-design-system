@@ -1,0 +1,30 @@
+/* =============================================================================
+ * Badge — 狀態標籤（藥丸形）
+ * 引用層級：comp.badge.* → sys.*；嚴禁直接使用 ref.*
+ * 樣式策略：深色主題上以「中性表面 + 語意色文字」呈現。
+ * ========================================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sv-comp-badge-item-spacing);
+
+  border-radius: var(--sv-comp-badge-corner-radius);
+  padding: var(--sv-comp-badge-padding-y) var(--sv-comp-badge-padding-x);
+
+  background-color: var(--sv-comp-badge-background);
+  color: var(--sv-comp-badge-label-color-neutral);
+
+  /* Typography — label-small group, 三屬性成組 */
+  font-size:   var(--sv-comp-badge-label-font-size);
+  line-height: var(--sv-comp-badge-label-line-height);
+  font-weight: var(--sv-comp-badge-label-font-weight);
+
+  white-space: nowrap;
+}
+
+/* Variants — 僅切換語意文字色 (neutral = default) */
+.badge--primary { color: var(--sv-comp-badge-label-color-primary); }
+.badge--success { color: var(--sv-comp-badge-label-color-success); }
+.badge--warning { color: var(--sv-comp-badge-label-color-warning); }
+.badge--error   { color: var(--sv-comp-badge-label-color-error); }

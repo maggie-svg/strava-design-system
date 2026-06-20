@@ -1,0 +1,19 @@
+/* =============================================================================
+ * Tooltip — 浮動提示
+ * 引用層級：comp.tooltip.* → sys.*；嚴禁直接使用 ref.*
+ * ========================================================================== */
+
+.tooltip {
+  width: max-content;
+  max-width: var(--sv-comp-tooltip-max-width);
+  z-index: 1000;
+
+  background-color: var(--sv-comp-tooltip-background);
+  color: var(--sv-comp-tooltip-text-color);
+  border-radius: var(--sv-comp-tooltip-corner-radius);
+  padding: var(--sv-comp-tooltip-padding-y) var(--sv-comp-tooltip-padding-x);
+
+  font-size:   var(--sv-comp-tooltip-font-size);
+  line-height: var(--sv-comp-tooltip-line-height);
+  font-weight: var(--sv-comp-tooltip-font-weight);
+}
